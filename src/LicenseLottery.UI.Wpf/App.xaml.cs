@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace LicenseLottery.UI.Wpf
 {
@@ -13,5 +7,11 @@ namespace LicenseLottery.UI.Wpf
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var mainViewModel = new MainViewModel();
+            var view = new MainWindow { DataContext = mainViewModel };
+            view.Show();
+        }
     }
 }
