@@ -2,7 +2,7 @@ using LicenseLottery.Core.Entities;
 
 namespace LicenseLottery.Core.UseCases.Implementations
 {
-    internal class CreateNewLottery : ICreateNewLottery
+    public class CreateNewLottery : ICreateNewLottery
     {
         private readonly ILotteryRepository _lotteryRepository;
 

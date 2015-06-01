@@ -2,7 +2,7 @@
 
 namespace LicenseLottery.Core.UseCases.Implementations
 {
-    internal interface ILotteryRepository
+    public interface ILotteryRepository
     {
         void Add(Lottery lottery);
     }

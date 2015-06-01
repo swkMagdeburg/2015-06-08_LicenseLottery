@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Microsoft.Practices.Unity;
 
 namespace LicenseLottery.UI.Wpf
 {
@@ -9,7 +10,9 @@ namespace LicenseLottery.UI.Wpf
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var mainViewModel = new MainViewModel();
+            var container = Bootstrapper.GenerateContainer();
+
+            var mainViewModel = container.Resolve(typeof(MainViewModel));
             var view = new MainWindow { DataContext = mainViewModel };
             view.Show();
         }
