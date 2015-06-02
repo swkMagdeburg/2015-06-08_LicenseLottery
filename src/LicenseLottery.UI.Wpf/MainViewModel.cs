@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LicenseLottery.Core.Entities;
@@ -9,13 +10,15 @@ namespace LicenseLottery.UI.Wpf
     public class MainViewModel : ViewModelBase
     {
         private readonly ICreateNewLottery _createNewLottery;
+        private readonly IReadLottery _readLottery;
         private Lottery _createdLottery;
         private string _newLotteryName;
         private Lottery _selectedLottery;
 
-        public MainViewModel(ICreateNewLottery createNewLottery)
+        public MainViewModel(ICreateNewLottery createNewLottery, IReadLottery readLottery)
         {
             _createNewLottery = createNewLottery;
+            _readLottery = readLottery;
             CreateNewLottery = new RelayCommand(CreateNewLotteryExecute, CreateNewLotteryCanExecute);
             Lotteries = new ObservableCollection<Lottery>();
         }
@@ -46,11 +49,17 @@ namespace LicenseLottery.UI.Wpf
         {
             CreatedLottery = _createNewLottery.WithName(NewLotteryName);
             NewLotteryName = string.Empty;
+            ReadLotteries();
         }
 
         private bool CreateNewLotteryCanExecute()
         {
             return !string.IsNullOrWhiteSpace(NewLotteryName);
+        }
+
+        private void ReadLotteries()
+        {
+            _readLottery.All().Except(Lotteries).ToList().ForEach(Lotteries.Add);
         }
     }
 }
