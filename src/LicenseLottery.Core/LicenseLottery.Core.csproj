@@ -42,8 +42,10 @@
     <Compile Include="Entities\Lottery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UseCases\ICreateNewLottery.cs" />
+    <Compile Include="UseCases\Implementations\ReadLottery.cs" />
     <Compile Include="UseCases\Implementations\CreateNewLottery.cs" />
     <Compile Include="UseCases\Implementations\ILotteryRepository.cs" />
+    <Compile Include="UseCases\IReadLottery.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
