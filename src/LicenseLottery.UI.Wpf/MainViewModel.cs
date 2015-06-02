@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LicenseLottery.Core.Entities;
@@ -8,13 +10,17 @@ namespace LicenseLottery.UI.Wpf
     public class MainViewModel : ViewModelBase
     {
         private readonly ICreateNewLottery _createNewLottery;
+        private readonly IReadLottery _readLottery;
         private Lottery _createdLottery;
         private string _newLotteryName;
+        private Lottery _selectedLottery;
 
-        public MainViewModel(ICreateNewLottery createNewLottery)
+        public MainViewModel(ICreateNewLottery createNewLottery, IReadLottery readLottery)
         {
             _createNewLottery = createNewLottery;
+            _readLottery = readLottery;
             CreateNewLottery = new RelayCommand(CreateNewLotteryExecute, CreateNewLotteryCanExecute);
+            Lotteries = new ObservableCollection<Lottery>();
         }
 
         public RelayCommand CreateNewLottery { get; private set; }
@@ -28,22 +34,32 @@ namespace LicenseLottery.UI.Wpf
         public Lottery CreatedLottery
         {
             get { return _createdLottery; }
-            set
-            {
-                Set(() => CreatedLottery, ref _createdLottery, value);
-                CreateNewLottery.RaiseCanExecuteChanged();
-            }
+            set { Set(() => CreatedLottery, ref _createdLottery, value); }
+        }
+
+        public ObservableCollection<Lottery> Lotteries { get; set; }
+
+        public Lottery SelectedLottery
+        {
+            get { return _selectedLottery; }
+            set { Set(() => SelectedLottery, ref _selectedLottery, value); }
         }
 
         private void CreateNewLotteryExecute()
         {
             CreatedLottery = _createNewLottery.WithName(NewLotteryName);
             NewLotteryName = string.Empty;
+            ReadLotteries();
         }
 
         private bool CreateNewLotteryCanExecute()
         {
             return !string.IsNullOrWhiteSpace(NewLotteryName);
+        }
+
+        private void ReadLotteries()
+        {
+            _readLottery.All().Except(Lotteries).ToList().ForEach(Lotteries.Add);
         }
     }
 }

@@ -12,5 +12,10 @@ namespace LicenseLottery.Infrastructure.Database
         {
             Lotteries.Add(lottery);
         }
+
+        public IEnumerable<Lottery> GetAll()
+        {
+            return Lotteries;
+        }
     }
 }

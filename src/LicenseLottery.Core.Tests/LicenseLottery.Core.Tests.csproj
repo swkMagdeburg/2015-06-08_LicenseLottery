@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CreateNewLotteryTests.cs" />
+    <Compile Include="ReadLotteryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
