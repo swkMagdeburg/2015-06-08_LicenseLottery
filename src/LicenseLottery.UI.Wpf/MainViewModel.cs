@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LicenseLottery.Core.Entities;
@@ -10,11 +11,13 @@ namespace LicenseLottery.UI.Wpf
         private readonly ICreateNewLottery _createNewLottery;
         private Lottery _createdLottery;
         private string _newLotteryName;
+        private Lottery _selectedLottery;
 
         public MainViewModel(ICreateNewLottery createNewLottery)
         {
             _createNewLottery = createNewLottery;
             CreateNewLottery = new RelayCommand(CreateNewLotteryExecute, CreateNewLotteryCanExecute);
+            Lotteries = new ObservableCollection<Lottery>();
         }
 
         public RelayCommand CreateNewLottery { get; private set; }
@@ -28,11 +31,15 @@ namespace LicenseLottery.UI.Wpf
         public Lottery CreatedLottery
         {
             get { return _createdLottery; }
-            set
-            {
-                Set(() => CreatedLottery, ref _createdLottery, value);
-                CreateNewLottery.RaiseCanExecuteChanged();
-            }
+            set { Set(() => CreatedLottery, ref _createdLottery, value); }
+        }
+
+        public ObservableCollection<Lottery> Lotteries { get; set; }
+
+        public Lottery SelectedLottery
+        {
+            get { return _selectedLottery; }
+            set { Set(() => SelectedLottery, ref _selectedLottery, value); }
         }
 
         private void CreateNewLotteryExecute()
