@@ -52,7 +52,8 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         private void ReadLotteries()
         {
-            _readLottery.All().Except(Lotteries).ToList().ForEach(Lotteries.Add);
+            Lotteries.Clear();
+            _readLottery.All().ToList().ForEach(Lotteries.Add);
         }
 
     }

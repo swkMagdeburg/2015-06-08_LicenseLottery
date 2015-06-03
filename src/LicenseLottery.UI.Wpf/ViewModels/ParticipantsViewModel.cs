@@ -12,20 +12,23 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 {
     public class ParticipantsViewModel : ViewModelBase
     {
+        private readonly IAddParticipantToLottery _addParticipantToLottery;
         private readonly ICreateNewParticipant _createNewParticipant;
-        private readonly IReadParticipant _readParticipant;
         private readonly IReadLottery _readLottery;
+        private readonly IReadParticipant _readParticipant;
         private Guid _lotteryId;
-        private string _pageTitle;
-        private Participant _toAddedParticipant;
         private string _newParticipantFirstname;
         private string _newParticipantLastname;
+        private string _pageTitle;
+        private Participant _toAddedParticipant;
 
-        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipant readParticipant, IReadLottery readLottery)
+        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipant readParticipant,
+            IReadLottery readLottery, IAddParticipantToLottery addParticipantToLottery)
         {
             _createNewParticipant = createNewParticipant;
             _readParticipant = readParticipant;
             _readLottery = readLottery;
+            _addParticipantToLottery = addParticipantToLottery;
 
             KnownParticipants = new ObservableCollection<Participant>();
             LotteryParticipants = new ObservableCollection<Participant>();
@@ -87,11 +90,13 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         private bool AddParticipantToLotteryCanExecute()
         {
-            return ToAddedParticipant != null;
+            return LotteryId != Guid.Empty && ToAddedParticipant != null;
         }
 
         private void AddParticipantToLotteryExecute()
         {
+            _addParticipantToLottery.WithIds(LotteryId, ToAddedParticipant.Id);
+            ReadLotteryParticipants();
         }
 
         private void On_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -99,12 +104,21 @@ namespace LicenseLottery.UI.Wpf.ViewModels
             if (e.PropertyName == GetPropertyName(() => LotteryId))
             {
                 PageTitle = string.Format("Participants for Lottery {0}", _readLottery.WithId(LotteryId).Name);
+                ReadLotteryParticipants();
             }
         }
 
         private void ReadKnownParticipants()
         {
-            _readParticipant.All().Except(KnownParticipants).ToList().ForEach(KnownParticipants.Add);
+            KnownParticipants.Clear();
+            _readParticipant.All().ToList().ForEach(KnownParticipants.Add);
+        }
+
+        private void ReadLotteryParticipants()
+        {
+            LotteryParticipants.Clear();
+            var lottery = _readLottery.WithId(LotteryId);
+            lottery.Participants.ToList().ForEach(LotteryParticipants.Add);
         }
     }
 }
