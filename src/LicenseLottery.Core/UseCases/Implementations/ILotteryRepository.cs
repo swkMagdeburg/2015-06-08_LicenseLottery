@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LicenseLottery.Core.Entities;
 
 namespace LicenseLottery.Core.UseCases.Implementations
@@ -7,5 +8,7 @@ namespace LicenseLottery.Core.UseCases.Implementations
     {
         void Add(Lottery lottery);
         IEnumerable<Lottery> GetAll();
+        Lottery GetOneById(Guid id);
+        void Save(Lottery lottery);
     }
 }

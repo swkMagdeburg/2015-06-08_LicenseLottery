@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using LicenseLottery.UI.Wpf.ViewModels;
 using Microsoft.Practices.Unity;
 
 namespace LicenseLottery.UI.Wpf

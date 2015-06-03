@@ -4,9 +4,9 @@ using LicenseLottery.Core.Entities;
 
 namespace LicenseLottery.Core.UseCases
 {
-    public interface IReadLottery
+    public interface IReadParticipant
     {
-        IEnumerable<Lottery> All();
-        Lottery WithId(Guid id);
+        IEnumerable<Participant> All();
+        Participant WithId(Guid id);
     }
 }

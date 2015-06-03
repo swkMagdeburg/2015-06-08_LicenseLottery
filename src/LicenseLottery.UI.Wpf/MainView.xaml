@@ -4,37 +4,139 @@
         Title="License Lottery" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="5" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="5" />
             <RowDefinition Height="*" />
             <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Lottery Name:" Grid.Column="1" Grid.Row="1" />
-        <TextBox Text="{Binding NewLotteryName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="1"
-                 VerticalContentAlignment="Center" />
+        <TabControl SelectedIndex="{Binding ActivePageIndex}" Grid.Column="1" Grid.Row="3" BorderThickness="0">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </TabControl.ItemContainerStyle>
 
-        <Button Command="{Binding CreateNewLottery}" Grid.Column="3" Grid.Row="3" Content="Create" />
+            <TabItem DataContext="{Binding LotteriesViewModel}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-        <Label Content="Lotteries" Grid.Column="1" Grid.Row="5" />
-        <DataGrid ItemsSource="{Binding Lotteries, Mode=OneWay}" SelectedItem="{Binding SelectedLottery}"
-                  AutoGenerateColumns="False" Grid.Column="3" Grid.Row="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Name" Width="3*" />
-                <DataGridTextColumn Binding="{Binding Date, Mode=OneWay}" Header="Date" Width="2*" />
-                <DataGridCheckBoxColumn Binding="{Binding Finished, Mode=OneWay}" Header="Finished" Width="*" />
-                <DataGridTextColumn Binding="{Binding Winner, Mode=OneWay}" Header="Winner" Width="3*" />
-            </DataGrid.Columns>
-        </DataGrid>
+                    <Label Content="Lotteries" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"
+                           HorizontalAlignment="Center" />
+
+                    <Label Content="Lottery Name:" Grid.Column="0" Grid.Row="2" />
+                    <TextBox Text="{Binding NewLotteryName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2"
+                             Grid.Row="2"
+                             VerticalContentAlignment="Center" />
+
+                    <Button Command="{Binding CreateNewLottery}" Grid.Column="2" Grid.Row="4" Content="Create" />
+
+                    <Label Content="Lotteries" Grid.Column="0" Grid.Row="6" />
+                    <DataGrid ItemsSource="{Binding Lotteries, Mode=OneWay}" SelectedItem="{Binding SelectedLottery}"
+                              AutoGenerateColumns="False" Grid.Column="2" Grid.Row="6">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Name" Width="3*" />
+                            <DataGridTextColumn Binding="{Binding Date, Mode=OneWay}" Header="Date" Width="2*" />
+                            <DataGridCheckBoxColumn Binding="{Binding Finished, Mode=OneWay}" Header="Finished"
+                                                    Width="*" />
+                            <DataGridTextColumn Binding="{Binding Winner, Mode=OneWay}" Header="Winner" Width="3*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem DataContext="{Binding ParticipantsViewModel}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{Binding PageTitle}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"
+                           HorizontalAlignment="Center" />
+
+                    <Label Content="Known Participants" Grid.Column="0" Grid.Row="2" />
+                    <DataGrid ItemsSource="{Binding KnownParticipants, Mode=OneWay}"
+                              SelectedItem="{Binding ToAddedParticipant}" AutoGenerateColumns="False" Grid.Column="0"
+                              Grid.Row="4">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Firstname, Mode=OneWay}" Header="Firstname"
+                                                Width="*" />
+                            <DataGridTextColumn Binding="{Binding Lastname, Mode=OneWay}" Header="Lastname" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Grid Grid.Column="0" Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding NewParticipantFirstname, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" />
+                        <TextBox Text="{Binding NewParticipantLastname, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="0" />
+                        <Button Content="Create New Participant" Command="{Binding CreateNewParticipant}" Grid.Column="0"
+                                Grid.ColumnSpan="3" Grid.Row="2" />
+                    </Grid>
+
+                    <Button Content=">>" Command="{Binding AddParticipantToLottery}" Grid.Column="1" Grid.Row="0"
+                            Grid.RowSpan="7" VerticalAlignment="Center" Margin="5,0,5,0" />
+
+                    <Label Content="Lottery Participants" Grid.Column="2" Grid.Row="2" />
+                    <DataGrid ItemsSource="{Binding LotteryParticipants, Mode=OneWay}" AutoGenerateColumns="False"
+                              Grid.Column="2" Grid.Row="4" Grid.RowSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Binding="{Binding Firstname, Mode=OneWay}"
+                                Header="Firstname" Width="*" />
+                            <DataGridTextColumn
+                                Binding="{Binding Lastname, Mode=OneWay}"
+                                Header="Lastname" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right">
+            <Button Content="Previous" Command="{Binding GotoPreviousPage}" Width="100" Margin="0,0,10,0" />
+            <Button Content="Next" Command="{Binding GotoNextPage}" Width="100" />
+        </StackPanel>
     </Grid>
 </Window>
