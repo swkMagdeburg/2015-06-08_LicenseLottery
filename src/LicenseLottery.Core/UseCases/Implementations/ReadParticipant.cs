@@ -4,11 +4,11 @@ using LicenseLottery.Core.Entities;
 
 namespace LicenseLottery.Core.UseCases.Implementations
 {
-    public class ReadParticipants : IReadParticipants
+    public class ReadParticipant : IReadParticipant
     {
         private readonly IParticipantRepository _participantRepository;
 
-        public ReadParticipants(IParticipantRepository participantRepository)
+        public ReadParticipant(IParticipantRepository participantRepository)
         {
             _participantRepository = participantRepository;
         }

@@ -10,16 +10,16 @@ using Moq;
 namespace LicenseLottery.Core.Tests
 {
     [TestClass]
-    public class ReadParticipantsTests
+    public class ReadParticipantTests
     {
         private Mock<IParticipantRepository> _participantsRepositoryMock;
-        private IReadParticipants _readParticipants;
+        private IReadParticipant _readParticipant;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _participantsRepositoryMock = new Mock<IParticipantRepository>();
-            _readParticipants = new ReadParticipants(_participantsRepositoryMock.Object);
+            _readParticipant = new ReadParticipant(_participantsRepositoryMock.Object);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace LicenseLottery.Core.Tests
             _participantsRepositoryMock.Setup(r => r.All()).Returns(existingParticipants);
 
             // Act
-            var participants = _readParticipants.All();
+            var participants = _readParticipant.All();
 
             // Assert
             existingParticipants.ForEach(ep => Assert.IsTrue(participants.Contains(ep), "Participant {0} {1} should be contained", ep.Firstname, ep.Lastname));
@@ -49,7 +49,7 @@ namespace LicenseLottery.Core.Tests
             _participantsRepositoryMock.Setup(r => r.GetOneById(existingParticipant.Id)).Returns(existingParticipant);
 
             // Act
-            var participant = _readParticipants.WithId(existingParticipant.Id);
+            var participant = _readParticipant.WithId(existingParticipant.Id);
 
             // Assert
             Assert.AreEqual(existingParticipant, participant);
@@ -62,7 +62,7 @@ namespace LicenseLottery.Core.Tests
             _participantsRepositoryMock.Setup(r => r.GetOneById(It.IsAny<Guid>())).Returns<Participant>(null);
 
             // Act
-            var lottery = _readParticipants.WithId(Guid.NewGuid());
+            var lottery = _readParticipant.WithId(Guid.NewGuid());
 
             // Assert
             Assert.AreEqual(Guid.Empty, lottery.Id);

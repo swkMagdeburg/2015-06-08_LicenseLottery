@@ -58,7 +58,7 @@
     <Compile Include="CreateNewLotteryTests.cs" />
     <Compile Include="ReadLotteryTests.cs" />
     <Compile Include="CreateNewParticipantTests.cs" />
-    <Compile Include="ReadParticipantsTests.cs" />
+    <Compile Include="ReadParticipantTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

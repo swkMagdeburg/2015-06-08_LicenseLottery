@@ -13,7 +13,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
     public class ParticipantsViewModel : ViewModelBase
     {
         private readonly ICreateNewParticipant _createNewParticipant;
-        private readonly IReadParticipants _readParticipants;
+        private readonly IReadParticipant _readParticipant;
         private readonly IReadLottery _readLottery;
         private Guid _lotteryId;
         private string _pageTitle;
@@ -21,10 +21,10 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         private string _newParticipantFirstname;
         private string _newParticipantLastname;
 
-        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipants readParticipants, IReadLottery readLottery)
+        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipant readParticipant, IReadLottery readLottery)
         {
             _createNewParticipant = createNewParticipant;
-            _readParticipants = readParticipants;
+            _readParticipant = readParticipant;
             _readLottery = readLottery;
 
             KnownParticipants = new ObservableCollection<Participant>();
@@ -104,7 +104,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         private void ReadKnownParticipants()
         {
-            _readParticipants.All().Except(KnownParticipants).ToList().ForEach(KnownParticipants.Add);
+            _readParticipant.All().Except(KnownParticipants).ToList().ForEach(KnownParticipants.Add);
         }
     }
 }
