@@ -24,5 +24,11 @@ namespace LicenseLottery.Infrastructure.Database
         {
             return Lotteries.SingleOrDefault(l => l.Id == id);
         }
+
+        public void Save(Lottery lottery)
+        {
+            Lotteries.RemoveWhere(l => l.Id == lottery.Id);
+            Add(lottery);
+        }
     }
 }

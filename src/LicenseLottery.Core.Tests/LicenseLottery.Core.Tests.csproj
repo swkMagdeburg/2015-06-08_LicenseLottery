@@ -59,6 +59,7 @@
     <Compile Include="ReadLotteryTests.cs" />
     <Compile Include="CreateNewParticipantTests.cs" />
     <Compile Include="ReadParticipantTests.cs" />
+    <Compile Include="AddParticipantToLotteryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
