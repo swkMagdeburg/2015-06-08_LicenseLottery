@@ -21,5 +21,10 @@ namespace LicenseLottery.Core.Entities
                 Lastname = lastname
             };
         }
+
+        public static Participant Empty()
+        {
+            return new Participant { Id = Guid.Empty };
+        }
     }
 }

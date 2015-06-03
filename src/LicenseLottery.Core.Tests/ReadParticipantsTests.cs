@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LicenseLottery.Core.Entities;
 using LicenseLottery.Core.UseCases;
@@ -38,6 +39,33 @@ namespace LicenseLottery.Core.Tests
 
             // Assert
             existingParticipants.ForEach(ep => Assert.IsTrue(participants.Contains(ep), "Participant {0} {1} should be contained", ep.Firstname, ep.Lastname));
+        }
+
+        [TestMethod]
+        public void ReadParticipants_WithId_should_return_Participant_from_Repository()
+        {
+            // Arrange
+            var existingParticipant = Participant.New(string.Empty, string.Empty);
+            _participantsRepositoryMock.Setup(r => r.GetOneById(existingParticipant.Id)).Returns(existingParticipant);
+
+            // Act
+            var participant = _readParticipants.WithId(existingParticipant.Id);
+
+            // Assert
+            Assert.AreEqual(existingParticipant, participant);
+        }
+
+        [TestMethod]
+        public void ReadParticipant_WithId_should_return_empty_Participant_when_Id_does_not_exists_in_Repository()
+        {
+            // Arrange
+            _participantsRepositoryMock.Setup(r => r.GetOneById(It.IsAny<Guid>())).Returns<Participant>(null);
+
+            // Act
+            var lottery = _readParticipants.WithId(Guid.NewGuid());
+
+            // Assert
+            Assert.AreEqual(Guid.Empty, lottery.Id);
         }
     }
 }
