@@ -1,20 +1,29 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LicenseLottery.Core.Entities;
+using LicenseLottery.Core.UseCases;
 
 namespace LicenseLottery.UI.Wpf.ViewModels
 {
     public class ParticipantsViewModel : ViewModelBase
     {
+        private readonly ICreateNewParticipant _createNewParticipant;
+        private readonly IReadParticipants _readParticipants;
         private Lottery _lottery;
         private string _pageTitle;
         private Participant _toAddedParticipant;
+        private string _newParticipantFirstname;
+        private string _newParticipantLastname;
 
-        public ParticipantsViewModel()
+        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipants readParticipants)
         {
+            _createNewParticipant = createNewParticipant;
+            _readParticipants = readParticipants;
+
             KnownParticipants = new ObservableCollection<Participant>();
             LotteryParticipants = new ObservableCollection<Participant>();
 
@@ -47,8 +56,17 @@ namespace LicenseLottery.UI.Wpf.ViewModels
             set { Set(() => ToAddedParticipant, ref _toAddedParticipant, value); }
         }
 
-        public string NewParticipantFirstname { get; set; }
-        public string NewParticipantLastname { get; set; }
+        public string NewParticipantFirstname
+        {
+            get { return _newParticipantFirstname; }
+            set { Set(() => NewParticipantFirstname, ref _newParticipantFirstname, value); }
+        }
+
+        public string NewParticipantLastname
+        {
+            get { return _newParticipantLastname; }
+            set { Set(() => NewParticipantLastname, ref _newParticipantLastname, value); }
+        }
 
         private bool CreateNewParticipantCanExecute()
         {
@@ -58,6 +76,10 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         private void CreateNewParticipantExecute()
         {
+            _createNewParticipant.WithFirstAndLastname(NewParticipantFirstname, NewParticipantLastname);
+            NewParticipantFirstname = string.Empty;
+            NewParticipantLastname = string.Empty;
+            ReadKnownParticipants();
         }
 
         private bool AddParticipantToLotteryCanExecute()
@@ -75,6 +97,11 @@ namespace LicenseLottery.UI.Wpf.ViewModels
             {
                 PageTitle = string.Format("Participants for Lottery {0}", Lottery.Name);
             }
+        }
+
+        private void ReadKnownParticipants()
+        {
+            _readParticipants.All().Except(KnownParticipants).ToList().ForEach(KnownParticipants.Add);
         }
     }
 }
