@@ -1,8 +1,25 @@
-﻿namespace LicenseLottery.Core.Entities
+﻿using System;
+
+namespace LicenseLottery.Core.Entities
 {
     public class Participant
     {
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        protected Participant()
+        {
+        }
+
+        public Guid Id { get; private set; }
+        public string Firstname { get; private set; }
+        public string Lastname { get; private set; }
+
+        public static Participant New(string firstname, string lastname)
+        {
+            return new Participant
+            {
+                Id = Guid.NewGuid(),
+                Firstname = firstname,
+                Lastname = lastname
+            };
+        }
     }
 }
