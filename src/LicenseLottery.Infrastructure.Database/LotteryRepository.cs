@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LicenseLottery.Core.Entities;
 using LicenseLottery.Core.UseCases.Implementations;
 
@@ -16,6 +18,11 @@ namespace LicenseLottery.Infrastructure.Database
         public IEnumerable<Lottery> GetAll()
         {
             return Lotteries;
+        }
+
+        public Lottery GetOneById(Guid id)
+        {
+            return Lotteries.SingleOrDefault(l => l.Id == id);
         }
     }
 }

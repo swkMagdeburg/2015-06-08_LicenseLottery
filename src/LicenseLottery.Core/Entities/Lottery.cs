@@ -25,5 +25,10 @@ namespace LicenseLottery.Core.Entities
                 Winner = string.Empty
             };
         }
+
+        public static Lottery Empty()
+        {
+            return new Lottery { Id = Guid.Empty };
+        }
     }
 }
