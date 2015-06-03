@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -58,7 +59,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         {
             if (e.PropertyName == GetPropertyName(() => LotteriesViewModel.SelectedLottery))
             {
-                ParticipantsViewModel.Lottery = LotteriesViewModel.SelectedLottery;
+                ParticipantsViewModel.LotteryId = LotteriesViewModel.SelectedLottery == null ? Guid.Empty : LotteriesViewModel.SelectedLottery.Id;
             }
         }
     }

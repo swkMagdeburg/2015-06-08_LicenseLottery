@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -13,16 +14,18 @@ namespace LicenseLottery.UI.Wpf.ViewModels
     {
         private readonly ICreateNewParticipant _createNewParticipant;
         private readonly IReadParticipants _readParticipants;
-        private Lottery _lottery;
+        private readonly IReadLottery _readLottery;
+        private Guid _lotteryId;
         private string _pageTitle;
         private Participant _toAddedParticipant;
         private string _newParticipantFirstname;
         private string _newParticipantLastname;
 
-        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipants readParticipants)
+        public ParticipantsViewModel(ICreateNewParticipant createNewParticipant, IReadParticipants readParticipants, IReadLottery readLottery)
         {
             _createNewParticipant = createNewParticipant;
             _readParticipants = readParticipants;
+            _readLottery = readLottery;
 
             KnownParticipants = new ObservableCollection<Participant>();
             LotteryParticipants = new ObservableCollection<Participant>();
@@ -38,10 +41,10 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         public ICommand CreateNewParticipant { get; private set; }
         public ICommand AddParticipantToLottery { get; private set; }
 
-        public Lottery Lottery
+        public Guid LotteryId
         {
-            get { return _lottery; }
-            set { Set(() => Lottery, ref _lottery, value); }
+            get { return _lotteryId; }
+            set { Set(() => LotteryId, ref _lotteryId, value); }
         }
 
         public string PageTitle
@@ -93,9 +96,9 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         private void On_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == GetPropertyName(() => Lottery))
+            if (e.PropertyName == GetPropertyName(() => LotteryId))
             {
-                PageTitle = string.Format("Participants for Lottery {0}", Lottery.Name);
+                PageTitle = string.Format("Participants for Lottery {0}", _readLottery.WithId(LotteryId).Name);
             }
         }
 
