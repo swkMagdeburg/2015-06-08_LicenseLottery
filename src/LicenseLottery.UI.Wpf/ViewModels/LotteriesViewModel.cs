@@ -12,7 +12,6 @@ namespace LicenseLottery.UI.Wpf.ViewModels
     {
         private readonly ICreateNewLottery _createNewLottery;
         private readonly IReadLottery _readLottery;
-        private Lottery _createdLottery;
         private string _newLotteryName;
         private Lottery _selectedLottery;
 
@@ -24,6 +23,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
             Lotteries = new ObservableCollection<Lottery>();
         }
 
+        public ObservableCollection<Lottery> Lotteries { get; set; }
         public ICommand CreateNewLottery { get; private set; }
 
         public string NewLotteryName
@@ -31,14 +31,6 @@ namespace LicenseLottery.UI.Wpf.ViewModels
             get { return _newLotteryName; }
             set { Set(() => NewLotteryName, ref _newLotteryName, value); }
         }
-
-        public Lottery CreatedLottery
-        {
-            get { return _createdLottery; }
-            set { Set(() => CreatedLottery, ref _createdLottery, value); }
-        }
-
-        public ObservableCollection<Lottery> Lotteries { get; set; }
 
         public Lottery SelectedLottery
         {
@@ -48,7 +40,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         private void CreateNewLotteryExecute()
         {
-            CreatedLottery = _createNewLottery.WithName(NewLotteryName);
+            _createNewLottery.WithName(NewLotteryName);
             NewLotteryName = string.Empty;
             ReadLotteries();
         }

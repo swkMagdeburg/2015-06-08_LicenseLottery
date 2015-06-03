@@ -66,18 +66,70 @@
                 </Grid>
             </TabItem>
 
-            <TabItem>
+            <TabItem DataContext="{Binding ParticipantsViewModel}">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Participants" Grid.Column="0" Grid.Row="0"
+                    <Label Content="{Binding PageTitle}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"
                            HorizontalAlignment="Center" />
 
+                    <Label Content="Known Participants" Grid.Column="0" Grid.Row="2" />
+                    <DataGrid ItemsSource="{Binding KnownParticipants, Mode=OneWay}"
+                              SelectedItem="{Binding ToAddedParticipant}" AutoGenerateColumns="False" Grid.Column="0"
+                              Grid.Row="4">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Firstname, Mode=OneWay}" Header="Firstname"
+                                                Width="*" />
+                            <DataGridTextColumn Binding="{Binding Lastname, Mode=OneWay}" Header="Lastname" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Grid Grid.Column="0" Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding NewParticipantFirstname, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" />
+                        <TextBox Text="{Binding NewParticipantLastname, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="0" />
+                        <Button Content="Create New Participant" Command="{Binding CreateNewParticipant}" Grid.Column="0"
+                                Grid.ColumnSpan="3" Grid.Row="2" />
+                    </Grid>
+
+                    <Button Content=">>" Command="{Binding AddParticipantToLottery}" Grid.Column="1" Grid.Row="0"
+                            Grid.RowSpan="7" VerticalAlignment="Center" Margin="5,0,5,0" />
+
+                    <Label Content="Lottery Participants" Grid.Column="2" Grid.Row="2" />
+                    <DataGrid ItemsSource="{Binding LotteryParticipants, Mode=OneWay}" AutoGenerateColumns="False"
+                              Grid.Column="2" Grid.Row="4" Grid.RowSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Binding="{Binding Firstname, Mode=OneWay}"
+                                Header="Firstname" Width="*" />
+                            <DataGridTextColumn
+                                Binding="{Binding Lastname, Mode=OneWay}"
+                                Header="Lastname" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
