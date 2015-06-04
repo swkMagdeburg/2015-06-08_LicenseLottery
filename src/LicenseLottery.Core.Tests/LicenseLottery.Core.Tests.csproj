@@ -65,9 +65,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LicenseLottery.Core\LicenseLottery.Core.csproj">
-      <Project>{6B906DC7-220A-40B3-A604-56081251E14F}</Project>
-      <Name>LicenseLottery.Core</Name>
+    <ProjectReference Include="..\LicenseLottery.Core.Entities\LicenseLottery.Core.Entities.csproj">
+      <Project>{27A05604-F819-47B2-9774-2F1D114E76CF}</Project>
+      <Name>LicenseLottery.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LicenseLottery.Core.UseCases\LicenseLottery.Core.UseCases.csproj">
+      <Project>{B21FE465-964F-4D62-9389-ADEF53D9B58D}</Project>
+      <Name>LicenseLottery.Core.UseCases</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

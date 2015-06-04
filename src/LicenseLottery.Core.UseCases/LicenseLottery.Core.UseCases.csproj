@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{703E7758-0843-41AF-9511-8E8A1681E9BB}</ProjectGuid>
+    <ProjectGuid>{B21FE465-964F-4D62-9389-ADEF53D9B58D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LicenseLottery.Infrastructure.Database</RootNamespace>
-    <AssemblyName>LicenseLottery.Infrastructure.Database</AssemblyName>
+    <RootNamespace>LicenseLottery.Core.UseCases</RootNamespace>
+    <AssemblyName>LicenseLottery.Core.UseCases</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,18 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LotteryRepository.cs" />
-    <Compile Include="ParticipantRepository.cs" />
+    <Compile Include="IAddParticipantToLottery.cs" />
+    <Compile Include="ICreateNewLottery.cs" />
+    <Compile Include="ICreateNewParticipant.cs" />
+    <Compile Include="Implementations\AddParticipantToLottery.cs" />
+    <Compile Include="Implementations\CreateNewLottery.cs" />
+    <Compile Include="Implementations\CreateNewParticipant.cs" />
+    <Compile Include="Implementations\ILotteryRepository.cs" />
+    <Compile Include="Implementations\IParticipantRepository.cs" />
+    <Compile Include="Implementations\ReadLottery.cs" />
+    <Compile Include="Implementations\ReadParticipant.cs" />
+    <Compile Include="IReadLottery.cs" />
+    <Compile Include="IReadParticipant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LicenseLottery.Core.Entities\LicenseLottery.Core.Entities.csproj">
       <Project>{27A05604-F819-47B2-9774-2F1D114E76CF}</Project>
       <Name>LicenseLottery.Core.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LicenseLottery.Core.UseCases\LicenseLottery.Core.UseCases.csproj">
-      <Project>{B21FE465-964F-4D62-9389-ADEF53D9B58D}</Project>
-      <Name>LicenseLottery.Core.UseCases</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

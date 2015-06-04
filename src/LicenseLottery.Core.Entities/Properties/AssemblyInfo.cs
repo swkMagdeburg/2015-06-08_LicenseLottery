@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LicenseLottery.Core")]
+[assembly: AssemblyTitle("LicenseLottery.Core.Entities")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LicenseLottery.Core")]
+[assembly: AssemblyProduct("LicenseLottery.Core.Entities")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ebbf1a07-6243-418e-a28b-7ab606411433")]
+[assembly: Guid("dd0e1362-d98c-4c49-9731-6e1fd38404ab")]
 
 // Version information for an assembly consists of the following four values:
 //

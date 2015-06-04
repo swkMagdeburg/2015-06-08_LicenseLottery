@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseLottery.UI.Wpf", "Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseLottery.Core.Tests", "LicenseLottery.Core.Tests\LicenseLottery.Core.Tests.csproj", "{6EE33494-0CCB-4754-908F-EC25B8C3B26B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseLottery.Core", "LicenseLottery.Core\LicenseLottery.Core.csproj", "{6B906DC7-220A-40B3-A604-56081251E14F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseLottery.Infrastructure.Database", "LicenseLottery.Infrastructure.Database\LicenseLottery.Infrastructure.Database.csproj", "{703E7758-0843-41AF-9511-8E8A1681E9BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseLottery.Core.Entities", "LicenseLottery.Core.Entities\LicenseLottery.Core.Entities.csproj", "{27A05604-F819-47B2-9774-2F1D114E76CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseLottery.Core.UseCases", "LicenseLottery.Core.UseCases\LicenseLottery.Core.UseCases.csproj", "{B21FE465-964F-4D62-9389-ADEF53D9B58D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +27,18 @@ Global
 		{6EE33494-0CCB-4754-908F-EC25B8C3B26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE33494-0CCB-4754-908F-EC25B8C3B26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE33494-0CCB-4754-908F-EC25B8C3B26B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B906DC7-220A-40B3-A604-56081251E14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B906DC7-220A-40B3-A604-56081251E14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B906DC7-220A-40B3-A604-56081251E14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B906DC7-220A-40B3-A604-56081251E14F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{703E7758-0843-41AF-9511-8E8A1681E9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{703E7758-0843-41AF-9511-8E8A1681E9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{703E7758-0843-41AF-9511-8E8A1681E9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{703E7758-0843-41AF-9511-8E8A1681E9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27A05604-F819-47B2-9774-2F1D114E76CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A05604-F819-47B2-9774-2F1D114E76CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A05604-F819-47B2-9774-2F1D114E76CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A05604-F819-47B2-9774-2F1D114E76CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B21FE465-964F-4D62-9389-ADEF53D9B58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B21FE465-964F-4D62-9389-ADEF53D9B58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B21FE465-964F-4D62-9389-ADEF53D9B58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B21FE465-964F-4D62-9389-ADEF53D9B58D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
