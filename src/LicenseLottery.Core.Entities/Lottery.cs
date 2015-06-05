@@ -9,6 +9,7 @@ namespace LicenseLottery.Core.Entities
         protected Lottery()
         {
             Participants = new List<Participant>();
+            Rounds = new List<Round>();
         }
 
         public Guid Id { get; private set; }
@@ -17,6 +18,7 @@ namespace LicenseLottery.Core.Entities
         public bool Finished { get; private set; }
         public string Winner { get; private set; }
         public List<Participant> Participants { get; private set; }
+        public List<Round> Rounds { get; private set; }
 
         public static Lottery New(string name)
         {
@@ -42,6 +44,11 @@ namespace LicenseLottery.Core.Entities
                 return;
             }
             Participants.Add(participant);
+        }
+
+        public void CreateNextRound()
+        {
+            Rounds.Add(Round.New(Participants));
         }
     }
 }
