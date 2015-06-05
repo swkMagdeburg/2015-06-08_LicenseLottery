@@ -12,17 +12,22 @@ namespace LicenseLottery.Core.Entities.Helper
             while (n > 1)
             {
                 n--;
-                
+
                 var k = random.Next(n + 1);
-                
+
                 var value = list[k];
                 list[k] = list[n];
                 list[n] = value;
             }
         }
 
-        public static T FetchFirst<T>(this IList<T> list)
+        public static T FetchFirstOrDefault<T>(this IList<T> list)
         {
+            if (list.Count <= 0)
+            {
+                return default(T);
+            }
+
             var firstElement = list[0];
             list.Remove(firstElement);
             return firstElement;

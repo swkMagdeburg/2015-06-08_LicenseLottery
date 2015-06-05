@@ -61,6 +61,7 @@
     <Compile Include="ReadParticipantTests.cs" />
     <Compile Include="AddParticipantToLotteryTests.cs" />
     <Compile Include="RunLotteryTests\CreateNextRound.cs" />
+    <Compile Include="RunLotteryTests\CreateNextRoundWithOddAmountOfParticipants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -32,8 +32,8 @@ namespace LicenseLottery.Core.Entities
             pot.Shuffle();
             while (pot.Any())
             {
-                var home = pot.FetchFirst();
-                var guest = pot.FetchFirst();
+                var home = pot.FetchFirstOrDefault();
+                var guest = pot.FetchFirstOrDefault() ?? DummyParticipant.GetDummyInstance();
                 Games.Add(Game.New(home, guest));
             }
         }
