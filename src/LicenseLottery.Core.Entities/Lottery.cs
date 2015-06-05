@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace LicenseLottery.Core.Entities
 {
     public class Lottery
     {
-        private readonly Collection<Participant> _participants;
-
         protected Lottery()
         {
-            _participants = new Collection<Participant>();
+            Participants = new List<Participant>();
         }
 
         public Guid Id { get; private set; }
@@ -19,11 +16,7 @@ namespace LicenseLottery.Core.Entities
         public string Name { get; private set; }
         public bool Finished { get; private set; }
         public string Winner { get; private set; }
-
-        public IReadOnlyCollection<Participant> Participants
-        {
-            get { return _participants; }
-        }
+        public List<Participant> Participants { get; private set; }
 
         public static Lottery New(string name)
         {
@@ -44,11 +37,11 @@ namespace LicenseLottery.Core.Entities
 
         public void AddParticipant(Participant participant)
         {
-            if (_participants.Any(p => p.Id == participant.Id))
+            if (Participants.Any(p => p.Id == participant.Id))
             {
                 return;
             }
-            _participants.Add(participant);
+            Participants.Add(participant);
         }
     }
 }

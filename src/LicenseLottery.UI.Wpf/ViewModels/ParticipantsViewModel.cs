@@ -111,14 +111,14 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         private void ReadKnownParticipants()
         {
             KnownParticipants.Clear();
-            _readParticipant.All().ToList().ForEach(KnownParticipants.Add);
+            _readParticipant.All().ForEach(KnownParticipants.Add);
         }
 
         private void ReadLotteryParticipants()
         {
             LotteryParticipants.Clear();
             var lottery = _readLottery.WithId(LotteryId);
-            lottery.Participants.ToList().ForEach(LotteryParticipants.Add);
+            lottery.Participants.ForEach(LotteryParticipants.Add);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         private void ReadLotteries()
         {
             Lotteries.Clear();
-            _readLottery.All().ToList().ForEach(Lotteries.Add);
+            _readLottery.All().ForEach(Lotteries.Add);
         }
 
     }

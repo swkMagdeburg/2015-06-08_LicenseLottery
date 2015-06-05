@@ -13,7 +13,7 @@ namespace LicenseLottery.Core.UseCases.Implementations
             _lotteryRepository = lotteryRepository;
         }
 
-        public IEnumerable<Lottery> All()
+        public List<Lottery> All()
         {
             return _lotteryRepository.GetAll();
         }
