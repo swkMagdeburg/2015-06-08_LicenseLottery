@@ -59,7 +59,7 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
         public void RunLottery_PlayNextRound_should_set_Winner_in_the_last_Round()
         {
             // Arrange
-            
+
             // Act
             _runLottery.PlayNextRound(_lottery.Id);
 

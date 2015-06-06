@@ -90,5 +90,23 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
             _lotteryRepositoryMock.Verify(r => r.Save(_lottery), Times.Once);
         }
 
+        [TestMethod]
+        public void RunLottery_CreateNextRound_should_use_Winner_from_last_Round()
+        {
+            // Arrange
+            _runLottery.CreateNextRound(_lottery.Id);
+            _runLottery.PlayLastRound(_lottery.Id);
+
+            // Act
+            _runLottery.CreateNextRound(_lottery.Id);
+
+            // Assert
+            var winnerFirstRound = _lottery.Rounds.First().Winners;
+            var participantsSecondRound = _lottery.Rounds.Last().Participants;
+            Assert.AreEqual(winnerFirstRound.Count, participantsSecondRound.Count,
+                "All Winner from the first Round should participate the second Round");
+            winnerFirstRound.ForEach(winner => Assert.IsTrue(participantsSecondRound.Contains(winner),
+                "Can't found Winner {0} {1} in Participants of the next Round", winner.Firstname, winner.Lastname));
+        }
     }
 }

@@ -48,7 +48,9 @@ namespace LicenseLottery.Core.Entities
 
         public void CreateNextRound()
         {
-            Rounds.Add(Round.New(Participants));
+            var lastRoundOrNull = Rounds.Any() ? Rounds.Last() : null;
+            var participantsInNextRound = lastRoundOrNull == null ? Participants : lastRoundOrNull.Winners;
+            Rounds.Add(Round.New(participantsInNextRound));
         }
     }
 }
