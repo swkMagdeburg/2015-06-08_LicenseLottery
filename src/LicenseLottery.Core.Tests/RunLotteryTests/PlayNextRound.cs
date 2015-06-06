@@ -54,5 +54,17 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
             // Assert
             _lotteryRepositoryMock.Verify(r => r.Save(_lottery));
         }
+
+        [TestMethod]
+        public void RunLottery_PlayNextRound_should_set_Winner_in_the_last_Round()
+        {
+            // Arrange
+            
+            // Act
+            _runLottery.PlayNextRound(_lottery.Id);
+
+            // Assert
+            Assert.AreEqual(2, _lottery.Rounds.Last().Winners.Count);
+        }
     }
 }

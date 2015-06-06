@@ -12,10 +12,12 @@ namespace LicenseLottery.Core.Entities
             Id = Guid.NewGuid();
             Games = new List<Game>();
             Participants = new List<Participant>();
+            Winners = new List<Participant>();
         }
 
         public Guid Id { get; set; }
         public List<Participant> Participants { get; private set; }
+        public List<Participant> Winners { get; private set; }
         public List<Game> Games { get; private set; }
 
         public static Round New(List<Participant> participants)
@@ -40,7 +42,11 @@ namespace LicenseLottery.Core.Entities
 
         public void Play()
         {
-            Games.ForEach(game => game.Play());
+            Games.ForEach(game =>
+            {
+                game.Play();
+                Winners.Add(game.Winner);
+            });
         }
     }
 }
