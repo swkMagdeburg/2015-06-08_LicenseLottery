@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -35,6 +34,8 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
             CreateNewParticipant = new RelayCommand(CreateNewParticipantExecute, CreateNewParticipantCanExecute);
             AddParticipantToLottery = new RelayCommand(AddParticipantToLotteryExecute, AddParticipantToLotteryCanExecute);
+
+            ReadKnownParticipants();
 
             PropertyChanged += On_PropertyChanged;
         }
