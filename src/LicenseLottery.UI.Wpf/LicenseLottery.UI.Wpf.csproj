@@ -86,7 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ParticipantToStringConverter.cs" />
     <Compile Include="ViewModels\ParticipantsViewModel.cs" />
+    <Compile Include="ViewModels\RunViewModel.cs" />
     <Page Include="MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
