@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -19,8 +18,11 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         {
             _createNewLottery = createNewLottery;
             _readLottery = readLottery;
+
             CreateNewLottery = new RelayCommand(CreateNewLotteryExecute, CreateNewLotteryCanExecute);
             Lotteries = new ObservableCollection<Lottery>();
+
+            ReadLotteries();
         }
 
         public ObservableCollection<Lottery> Lotteries { get; set; }
@@ -53,8 +55,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
         private void ReadLotteries()
         {
             Lotteries.Clear();
-            _readLottery.All().ToList().ForEach(Lotteries.Add);
+            _readLottery.All().ForEach(Lotteries.Add);
         }
-
     }
 }

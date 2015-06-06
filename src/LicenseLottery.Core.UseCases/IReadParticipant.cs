@@ -6,7 +6,7 @@ namespace LicenseLottery.Core.UseCases
 {
     public interface IReadParticipant
     {
-        IEnumerable<Participant> All();
+        List<Participant> All();
         Participant WithId(Guid id);
     }
 }

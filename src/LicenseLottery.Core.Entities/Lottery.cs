@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace LicenseLottery.Core.Entities
 {
     public class Lottery
     {
-        private readonly Collection<Participant> _participants;
-
         protected Lottery()
         {
-            _participants = new Collection<Participant>();
+            Participants = new List<Participant>();
+            Rounds = new List<Round>();
         }
 
         public Guid Id { get; private set; }
         public DateTime Date { get; private set; }
         public string Name { get; private set; }
         public bool Finished { get; private set; }
-        public string Winner { get; private set; }
-
-        public IReadOnlyCollection<Participant> Participants
-        {
-            get { return _participants; }
-        }
+        public Participant Winner { get; private set; }
+        public List<Participant> Participants { get; private set; }
+        public List<Round> Rounds { get; private set; }
 
         public static Lottery New(string name)
         {
@@ -32,8 +27,7 @@ namespace LicenseLottery.Core.Entities
                 Id = Guid.NewGuid(),
                 Name = name,
                 Date = DateTime.Today,
-                Finished = false,
-                Winner = string.Empty
+                Finished = false
             };
         }
 
@@ -44,11 +38,40 @@ namespace LicenseLottery.Core.Entities
 
         public void AddParticipant(Participant participant)
         {
-            if (_participants.Any(p => p.Id == participant.Id))
+            if (Participants.Any(p => p.Id == participant.Id))
             {
                 return;
             }
-            _participants.Add(participant);
+            Participants.Add(participant);
+        }
+
+        public void CreateNextRound()
+        {
+            RemoveNotPlayedRound();
+            var lastRoundOrNull = Rounds.Any() ? Rounds.Last() : null;
+            var participantsInNextRound = lastRoundOrNull == null ? Participants : lastRoundOrNull.Winners;
+            Rounds.Add(Round.New(participantsInNextRound));
+        }
+
+        public void PlayRound()
+        {
+            var roundToPlay = Rounds.Last();
+            roundToPlay.Play();
+            FinishLotteryIfPossible();
+        }
+
+        private void FinishLotteryIfPossible()
+        {
+            var lastRound = Rounds.Last();
+            if (lastRound.Winners.Count > 1) return;
+
+            Finished = true;
+            Winner = lastRound.Winners.First();
+        }
+
+        private void RemoveNotPlayedRound()
+        {
+            Rounds.RemoveAll(r => !r.IsPlayed);
         }
     }
 }

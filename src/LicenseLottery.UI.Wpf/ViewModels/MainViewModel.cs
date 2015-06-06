@@ -8,13 +8,14 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private const int PageCount = 2;
+        private const int PageCount = 3;
         private int _activePageIndex;
 
-        public MainViewModel(LotteriesViewModel lotteriesViewModel, ParticipantsViewModel participantsViewModel)
+        public MainViewModel(LotteriesViewModel lotteriesViewModel, ParticipantsViewModel participantsViewModel, RunViewModel runViewModel)
         {
             LotteriesViewModel = lotteriesViewModel;
             ParticipantsViewModel = participantsViewModel;
+            RunViewModel = runViewModel;
 
             GotoNextPage = new RelayCommand(GotoNextPageExecute, GotoNextPageCanExecute);
             GotoPreviousPage = new RelayCommand(GotoPreviousPageExecute, GotoPreviousPageCanExecute);
@@ -34,6 +35,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
 
         public LotteriesViewModel LotteriesViewModel { get; private set; }
         public ParticipantsViewModel ParticipantsViewModel { get; private set; }
+        public RunViewModel RunViewModel { get; private set; }
 
         private void GotoNextPageExecute()
         {
@@ -60,6 +62,7 @@ namespace LicenseLottery.UI.Wpf.ViewModels
             if (e.PropertyName == GetPropertyName(() => LotteriesViewModel.SelectedLottery))
             {
                 ParticipantsViewModel.LotteryId = LotteriesViewModel.SelectedLottery == null ? Guid.Empty : LotteriesViewModel.SelectedLottery.Id;
+                RunViewModel.LotteryId = ParticipantsViewModel.LotteryId;
             }
         }
     }

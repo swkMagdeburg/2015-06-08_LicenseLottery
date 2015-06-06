@@ -13,7 +13,7 @@ namespace LicenseLottery.Core.UseCases.Implementations
             _participantRepository = participantRepository;
         }
 
-        public IEnumerable<Participant> All()
+        public List<Participant> All()
         {
             return _participantRepository.All();
         }

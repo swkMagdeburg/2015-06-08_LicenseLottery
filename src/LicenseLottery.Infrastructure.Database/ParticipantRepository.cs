@@ -8,14 +8,14 @@ namespace LicenseLottery.Infrastructure.Database
 {
     public class ParticipantRepository : IParticipantRepository
     {
-        private static readonly HashSet<Participant> Participants = new HashSet<Participant>();
+        private static readonly List<Participant> Participants = new List<Participant>();
 
         public void Add(Participant participant)
         {
             Participants.Add(participant);
         }
 
-        public IEnumerable<Participant> All()
+        public List<Participant> All()
         {
             return Participants;
         }

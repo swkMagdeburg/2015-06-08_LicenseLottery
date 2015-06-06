@@ -39,9 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyParticipant.cs" />
+    <Compile Include="Helper\ThreadSafeRandom.cs" />
     <Compile Include="Lottery.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Participant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helper\ListExtensions.cs" />
+    <Compile Include="Round.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

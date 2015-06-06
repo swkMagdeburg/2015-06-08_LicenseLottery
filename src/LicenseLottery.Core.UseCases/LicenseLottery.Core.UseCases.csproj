@@ -51,7 +51,9 @@
     <Compile Include="Implementations\ReadParticipant.cs" />
     <Compile Include="IReadLottery.cs" />
     <Compile Include="IReadParticipant.cs" />
+    <Compile Include="IRunLottery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implementations\RunLottery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LicenseLottery.Core.Entities\LicenseLottery.Core.Entities.csproj">

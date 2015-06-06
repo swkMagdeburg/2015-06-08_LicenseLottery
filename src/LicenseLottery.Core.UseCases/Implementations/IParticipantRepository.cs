@@ -7,7 +7,7 @@ namespace LicenseLottery.Core.UseCases.Implementations
     public interface IParticipantRepository
     {
         void Add(Participant participant);
-        IEnumerable<Participant> All();
+        List<Participant> All();
         Participant GetOneById(Guid id);
     }
 }

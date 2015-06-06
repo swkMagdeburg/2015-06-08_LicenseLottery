@@ -8,14 +8,14 @@ namespace LicenseLottery.Infrastructure.Database
 {
     public class LotteryRepository : ILotteryRepository
     {
-        private static readonly HashSet<Lottery> Lotteries = new HashSet<Lottery>();
+        private static readonly List<Lottery> Lotteries = new List<Lottery>();
 
         public void Add(Lottery lottery)
         {
             Lotteries.Add(lottery);
         }
 
-        public IEnumerable<Lottery> GetAll()
+        public List<Lottery> GetAll()
         {
             return Lotteries;
         }
@@ -27,7 +27,8 @@ namespace LicenseLottery.Infrastructure.Database
 
         public void Save(Lottery lottery)
         {
-            Lotteries.RemoveWhere(l => l.Id == lottery.Id);
+            var existingLottery = Lotteries.FirstOrDefault(l => l.Id == lottery.Id);
+            Lotteries.Remove(existingLottery);
             Add(lottery);
         }
     }
