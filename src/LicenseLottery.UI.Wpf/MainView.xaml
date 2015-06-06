@@ -70,9 +70,7 @@
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Name" Width="3*" />
-                            <DataGridTextColumn Binding="{Binding Date, Mode=OneWay}" Header="Date" Width="2*" />
-                            <DataGridCheckBoxColumn Binding="{Binding Finished, Mode=OneWay}" Header="Finished"
-                                                    Width="*" />
+                            <DataGridCheckBoxColumn Binding="{Binding Finished, Mode=OneWay}" Header="Finished" Width="*" />
                             <DataGridTextColumn Binding="{Binding Winner, Mode=OneWay}" Header="Winner" Width="3*" />
                         </DataGrid.Columns>
                     </DataGrid>

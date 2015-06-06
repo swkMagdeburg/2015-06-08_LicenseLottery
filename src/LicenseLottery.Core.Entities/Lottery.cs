@@ -13,7 +13,6 @@ namespace LicenseLottery.Core.Entities
         }
 
         public Guid Id { get; private set; }
-        public DateTime Date { get; private set; }
         public string Name { get; private set; }
         public bool Finished { get; private set; }
         public Participant Winner { get; private set; }
@@ -26,7 +25,6 @@ namespace LicenseLottery.Core.Entities
             {
                 Id = Guid.NewGuid(),
                 Name = name,
-                Date = DateTime.Today,
                 Finished = false
             };
         }
