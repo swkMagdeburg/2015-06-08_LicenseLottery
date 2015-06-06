@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace LicenseLottery.Core.UseCases.Implementations
 {
@@ -15,6 +16,13 @@ namespace LicenseLottery.Core.UseCases.Implementations
         {
             var lottery = _lotteryRepository.GetOneById(lotteryId);
             lottery.CreateNextRound();
+            _lotteryRepository.Save(lottery);
+        }
+
+        public void PlayNextRound(Guid lotteryId)
+        {
+            var lottery = _lotteryRepository.GetOneById(lotteryId);
+            lottery.Rounds.Last().Play();
             _lotteryRepository.Save(lottery);
         }
     }

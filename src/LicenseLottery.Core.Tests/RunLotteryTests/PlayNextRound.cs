@@ -8,7 +8,7 @@ using Moq;
 namespace LicenseLottery.Core.Tests.RunLotteryTests
 {
     [TestClass]
-    public class CreateNextRoundWithOddAmountOfParticipants
+    public class PlayNextRound
     {
         private Lottery _lottery;
         private Mock<ILotteryRepository> _lotteryRepositoryMock;
@@ -21,24 +21,38 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
             _lottery.AddParticipant(Participant.New("Uma", "Thurman"));
             _lottery.AddParticipant(Participant.New("Quentin", "Tarantino"));
             _lottery.AddParticipant(Participant.New("Samuel", "L. Jackson"));
+            _lottery.AddParticipant(Participant.New("Harvey", "Keitel"));
 
             _lotteryRepositoryMock = new Mock<ILotteryRepository>();
             _lotteryRepositoryMock.Setup(r => r.GetOneById(_lottery.Id)).Returns(_lottery);
 
             _runLottery = new RunLottery(_lotteryRepositoryMock.Object);
+            _runLottery.CreateNextRound(_lottery.Id);
         }
 
         [TestMethod]
-        public void RunLottery_CreateNextRound_with_3_Participants_should_add_a_DummyParticipant_as_Guest_to_last_Game()
+        public void RunLottey_PlayNextRound_should_set_Winner_and_Loser_in_the_game()
         {
             // Arrange
-            
+
             // Act
-            _runLottery.CreateNextRound(_lottery.Id);
+            _runLottery.PlayNextRound(_lottery.Id);
 
             // Assert
-            var lastGuestParticipant = _lottery.Rounds.Last().Games.Last().Guest;
-            Assert.IsInstanceOfType(lastGuestParticipant, typeof(DummyParticipant));
+            var lastRound = _lottery.Rounds.Last();
+            lastRound.Games.ForEach(game => Assert.AreNotEqual(game.Winner, game.Loser, "Winner and Loser should not be the same"));
+        }
+
+        [TestMethod]
+        public void RunLottery_PlayNextRound_should_save_the_Lottery()
+        {
+            // Arrange
+
+            // Act
+            _runLottery.PlayNextRound(_lottery.Id);
+
+            // Assert
+            _lotteryRepositoryMock.Verify(r => r.Save(_lottery));
         }
     }
 }

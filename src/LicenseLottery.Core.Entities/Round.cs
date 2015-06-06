@@ -37,5 +37,10 @@ namespace LicenseLottery.Core.Entities
                 Games.Add(Game.New(home, guest));
             }
         }
+
+        public void Play()
+        {
+            Games.ForEach(game => game.Play());
+        }
     }
 }
