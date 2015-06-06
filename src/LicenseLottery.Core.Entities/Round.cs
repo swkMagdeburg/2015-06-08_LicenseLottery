@@ -44,6 +44,7 @@ namespace LicenseLottery.Core.Entities
 
         public void Play()
         {
+            Winners.Clear();
             Games.ForEach(game =>
             {
                 game.Play();

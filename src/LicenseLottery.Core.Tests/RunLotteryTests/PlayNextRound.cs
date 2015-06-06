@@ -94,5 +94,18 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
             Assert.IsTrue(_lottery.Finished, "Finished should be true after the last Round is played");
             Assert.IsNotNull(_lottery.Winner, "Winner should be set after the last Round is played");
         }
+
+        [TestMethod]
+        public void RunLottery_PlayNextRound_twice_should_cleanup_the_Winners_list()
+        {
+            // Arrange
+            
+            // Act
+            _runLottery.PlayNextRound(_lottery.Id);
+            _runLottery.PlayNextRound(_lottery.Id);
+
+            // Assert
+            Assert.AreEqual(2, _lottery.Rounds.Last().Winners.Count);
+        }
     }
 }

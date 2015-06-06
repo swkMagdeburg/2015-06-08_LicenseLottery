@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DummyParticipant.cs" />
+    <Compile Include="Helper\ThreadSafeRandom.cs" />
     <Compile Include="Lottery.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Participant.cs" />
