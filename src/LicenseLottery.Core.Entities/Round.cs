@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using LicenseLottery.Core.Entities.Helper;
 
 namespace LicenseLottery.Core.Entities
@@ -19,6 +20,7 @@ namespace LicenseLottery.Core.Entities
         public List<Participant> Participants { get; private set; }
         public List<Participant> Winners { get; private set; }
         public List<Game> Games { get; private set; }
+        public Boolean IsPlayed { get; private set; }
 
         public static Round New(List<Participant> participants)
         {
@@ -47,6 +49,7 @@ namespace LicenseLottery.Core.Entities
                 game.Play();
                 Winners.Add(game.Winner);
             });
+            IsPlayed = true;
         }
     }
 }

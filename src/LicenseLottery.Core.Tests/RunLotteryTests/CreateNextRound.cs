@@ -108,5 +108,19 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
             winnerFirstRound.ForEach(winner => Assert.IsTrue(participantsSecondRound.Contains(winner),
                 "Can't found Winner {0} {1} in Participants of the next Round", winner.Firstname, winner.Lastname));
         }
+
+        [TestMethod]
+        public void RunLottery_CreateNextRound_should_not_add_a_new_one_when_the_last_Round_ist_not_played()
+        {
+            // Arrange
+            
+            // Act
+            _runLottery.CreateNextRound(_lottery.Id);
+            _runLottery.CreateNextRound(_lottery.Id);
+            _runLottery.CreateNextRound(_lottery.Id);
+
+            // Assert
+            Assert.AreEqual(1, _lottery.Rounds.Count, "a new Round should be created");
+        }
     }
 }

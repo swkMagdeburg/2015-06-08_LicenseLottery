@@ -27,7 +27,7 @@ namespace LicenseLottery.Core.Entities
                 Id = Guid.NewGuid(),
                 Name = name,
                 Date = DateTime.Today,
-                Finished = false,
+                Finished = false
             };
         }
 
@@ -47,6 +47,7 @@ namespace LicenseLottery.Core.Entities
 
         public void CreateNextRound()
         {
+            RemoveNotPlayedRound();
             var lastRoundOrNull = Rounds.Any() ? Rounds.Last() : null;
             var participantsInNextRound = lastRoundOrNull == null ? Participants : lastRoundOrNull.Winners;
             Rounds.Add(Round.New(participantsInNextRound));
@@ -66,7 +67,11 @@ namespace LicenseLottery.Core.Entities
 
             Finished = true;
             Winner = lastRound.Winners.First();
+        }
 
+        private void RemoveNotPlayedRound()
+        {
+            Rounds.RemoveAll(r => !r.IsPlayed);
         }
     }
 }
