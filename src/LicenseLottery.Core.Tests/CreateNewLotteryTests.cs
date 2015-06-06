@@ -58,18 +58,6 @@ namespace LicenseLottery.Core.Tests
         }
 
         [TestMethod]
-        public void CreateNewLottery_WithName_should_set_Date_to_Today()
-        {
-            // Arrange
-
-            // Act
-            var lottery = _createNewLottery.WithName(string.Empty);
-
-            // Assert
-            Assert.AreEqual(DateTime.Today, lottery.Date);
-        }
-
-        [TestMethod]
         public void CreateNewLottery_WithName_should_set_Finished()
         {
             // Arrange

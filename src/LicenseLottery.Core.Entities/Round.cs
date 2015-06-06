@@ -48,9 +48,19 @@ namespace LicenseLottery.Core.Entities
             Games.ForEach(game =>
             {
                 game.Play();
-                Winners.Add(game.Winner);
+                AddToWinners(game.Winner);
             });
             IsPlayed = true;
+        }
+
+        private void AddToWinners(Participant winner)
+        {
+            if (winner is DummyParticipant)
+            {
+                return;
+            }
+
+            Winners.Add(winner);
         }
     }
 }
