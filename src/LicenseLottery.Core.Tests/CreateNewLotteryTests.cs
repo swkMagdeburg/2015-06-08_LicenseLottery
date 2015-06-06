@@ -90,7 +90,7 @@ namespace LicenseLottery.Core.Tests
             var lottery = _createNewLottery.WithName("the sunday lottery");
 
             // Assert
-            Assert.AreEqual(string.Empty, lottery.Winner);
+            Assert.IsNull(lottery.Winner);
         }
 
         [TestMethod]

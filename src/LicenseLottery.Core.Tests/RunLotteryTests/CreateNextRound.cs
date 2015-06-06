@@ -95,7 +95,7 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
         {
             // Arrange
             _runLottery.CreateNextRound(_lottery.Id);
-            _runLottery.PlayLastRound(_lottery.Id);
+            _runLottery.PlayNextRound(_lottery.Id);
 
             // Act
             _runLottery.CreateNextRound(_lottery.Id);

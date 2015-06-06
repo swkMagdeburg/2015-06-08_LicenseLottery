@@ -22,7 +22,7 @@ namespace LicenseLottery.Core.UseCases.Implementations
         public void PlayNextRound(Guid lotteryId)
         {
             var lottery = _lotteryRepository.GetOneById(lotteryId);
-            lottery.Rounds.Last().Play();
+            lottery.PlayRound();
             _lotteryRepository.Save(lottery);
         }
     }

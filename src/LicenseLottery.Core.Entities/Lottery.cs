@@ -16,7 +16,7 @@ namespace LicenseLottery.Core.Entities
         public DateTime Date { get; private set; }
         public string Name { get; private set; }
         public bool Finished { get; private set; }
-        public string Winner { get; private set; }
+        public Participant Winner { get; private set; }
         public List<Participant> Participants { get; private set; }
         public List<Round> Rounds { get; private set; }
 
@@ -28,7 +28,6 @@ namespace LicenseLottery.Core.Entities
                 Name = name,
                 Date = DateTime.Today,
                 Finished = false,
-                Winner = string.Empty
             };
         }
 
@@ -51,6 +50,23 @@ namespace LicenseLottery.Core.Entities
             var lastRoundOrNull = Rounds.Any() ? Rounds.Last() : null;
             var participantsInNextRound = lastRoundOrNull == null ? Participants : lastRoundOrNull.Winners;
             Rounds.Add(Round.New(participantsInNextRound));
+        }
+
+        public void PlayRound()
+        {
+            var roundToPlay = Rounds.Last();
+            roundToPlay.Play();
+            FinishLotteryIfPossible();
+        }
+
+        private void FinishLotteryIfPossible()
+        {
+            var lastRound = Rounds.Last();
+            if (lastRound.Winners.Count > 1) return;
+
+            Finished = true;
+            Winner = lastRound.Winners.First();
+
         }
     }
 }

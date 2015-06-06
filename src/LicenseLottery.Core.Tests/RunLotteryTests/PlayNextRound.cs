@@ -66,5 +66,33 @@ namespace LicenseLottery.Core.Tests.RunLotteryTests
             // Assert
             Assert.AreEqual(2, _lottery.Rounds.Last().Winners.Count);
         }
+
+        [TestMethod]
+        public void RunLottery_PlayNextRound_should_not_finish_the_Lottery_when_there_are_Rounds_left_to_play()
+        {
+            // Arrange
+            
+            // Act
+            _runLottery.PlayNextRound(_lottery.Id);
+
+            // Assert
+            Assert.IsFalse(_lottery.Finished, "Finished should be false");
+            Assert.IsNull(_lottery.Winner, "Winner should be null");
+        }
+
+        [TestMethod]
+        public void RunLottery_PlayNextRound_should_finish_the_Lottery_when_there_is_no_Rounds_left_to_play()
+        {
+            // Arrange
+
+            // Act
+            _runLottery.PlayNextRound(_lottery.Id);
+            _runLottery.CreateNextRound(_lottery.Id);
+            _runLottery.PlayNextRound(_lottery.Id);
+
+            // Assert
+            Assert.IsTrue(_lottery.Finished, "Finished should be true after the last Round is played");
+            Assert.IsNotNull(_lottery.Winner, "Winner should be set after the last Round is played");
+        }
     }
 }
