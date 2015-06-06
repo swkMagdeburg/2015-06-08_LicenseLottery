@@ -5,11 +5,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         Title="License Lottery" Height="350" Width="525">
-    
+
     <Window.Resources>
         <converters:ParticipantToStringConverter x:Key="ParticipantToStringConverter" />
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
@@ -38,31 +38,17 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="5" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="5" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
 
-                    <Label Content="Lotteries" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"
-                           HorizontalAlignment="Center" />
+                    <Label Content="Lotteries" Grid.Column="0" Grid.Row="0" />
 
-                    <Label Content="Lottery Name:" Grid.Column="0" Grid.Row="2" />
-                    <TextBox Text="{Binding NewLotteryName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2"
-                             Grid.Row="2"
-                             VerticalContentAlignment="Center" />
-
-                    <Button Command="{Binding CreateNewLottery}" Grid.Column="2" Grid.Row="4" Content="Create" />
-
-                    <Label Content="Lotteries" Grid.Column="0" Grid.Row="6" />
                     <DataGrid ItemsSource="{Binding Lotteries, Mode=OneWay}" SelectedItem="{Binding SelectedLottery}"
-                              AutoGenerateColumns="False" Grid.Column="2" Grid.Row="6">
+                              AutoGenerateColumns="False" Grid.Column="0" Grid.Row="2">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <command:EventToCommand Command="{Binding ElementName=BtnNext, Path=Command}" />
@@ -70,10 +56,17 @@
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Name" Width="3*" />
-                            <DataGridCheckBoxColumn Binding="{Binding Finished, Mode=OneWay}" Header="Finished" Width="*" />
+                            <DataGridCheckBoxColumn Binding="{Binding Finished, Mode=OneWay}" Header="Finished"
+                                                    Width="*" />
                             <DataGridTextColumn Binding="{Binding Winner, Mode=OneWay}" Header="Winner" Width="3*" />
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <TextBox Text="{Binding NewLotteryName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4"
+                             VerticalContentAlignment="Center" />
+
+                    <Button Command="{Binding CreateNewLottery}" Grid.Row="6" Content="Create new Lottery" />
+
                 </Grid>
             </TabItem>
 
@@ -125,10 +118,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Text="{Binding NewParticipantFirstname, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" />
-                        <TextBox Text="{Binding NewParticipantLastname, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="0" />
-                        <Button Content="Create New Participant" Command="{Binding CreateNewParticipant}" Grid.Column="0"
-                                Grid.ColumnSpan="3" Grid.Row="2" />
+                        <TextBox Text="{Binding NewParticipantFirstname, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="0" Grid.Row="0" />
+                        <TextBox Text="{Binding NewParticipantLastname, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="2" Grid.Row="0" />
+                        <Button Content="Create New Participant" Command="{Binding CreateNewParticipant}"
+                                Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" />
                     </Grid>
 
                     <Button Content=">>" Command="{Binding AddParticipantToLottery}" Grid.Column="1" Grid.Row="0"
@@ -148,7 +143,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <TabItem DataContext="{Binding RunViewModel}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -165,18 +160,23 @@
                         <ColumnDefinition Width="15" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <Label Content="{Binding RoundName}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" />
 
                     <Label Content="Games" Grid.Column="0" Grid.Row="2" />
                     <DataGrid ItemsSource="{Binding Games}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="4">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Home, Mode=OneWay, Converter={StaticResource ParticipantToStringConverter}}" Header="Home" Width="*" />
-                            <DataGridTextColumn Header="VS." Width="30"/>
-                            <DataGridTextColumn Binding="{Binding Guest, Mode=OneWay, Converter={StaticResource ParticipantToStringConverter}}" Header="Guest" Width="*" />
+                            <DataGridTextColumn
+                                Binding="{Binding Home, Mode=OneWay, Converter={StaticResource ParticipantToStringConverter}}"
+                                Header="Home" Width="*" />
+                            <DataGridTextColumn Header="VS." Width="30" />
+                            <DataGridTextColumn
+                                Binding="{Binding Guest, Mode=OneWay, Converter={StaticResource ParticipantToStringConverter}}"
+                                Header="Guest" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Create Next Round" Command="{Binding CreateNextRound}" Grid.Column="0" Grid.Row="6" />
+                    <Button Content="Create Next Round" Command="{Binding CreateNextRound}" Grid.Column="0"
+                            Grid.Row="6" />
 
                     <Label Content="Winners" Grid.Column="2" Grid.Row="2" />
                     <DataGrid ItemsSource="{Binding Winners}" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="4">
