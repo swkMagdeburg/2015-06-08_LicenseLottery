@@ -8,7 +8,10 @@ namespace LicenseLottery.Infrastructure.Database
 {
     public class LotteryRepository : ILotteryRepository
     {
-        private static readonly List<Lottery> Lotteries = new List<Lottery>();
+        private static readonly List<Lottery> Lotteries = new List<Lottery>
+        {
+            Lottery.New("Softwerkskammer Magdeburg Treffen Nr. 22")
+        };
 
         public void Add(Lottery lottery)
         {
